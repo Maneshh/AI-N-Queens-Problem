@@ -45,7 +45,7 @@ def nQueen(mat, r):
  
 if __name__ == '__main__':
     # N × N chessboard
-    N = 4
+    N = int(input('Enter Number of Queens'))
     # mat[][]` keeps track of the position of queens in
     # the current configuration
     mat = [['–' for x in range(N)] for y in range(N)]
