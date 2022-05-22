@@ -6,7 +6,7 @@ def getBoard():
     for i in range(N):
         emptyLists = []
         for j in range(N):
-            emptyLists.append('-')
+            emptyLists.append('[-]')
         board.append(emptyLists)
 
 def printBoard():
@@ -18,17 +18,17 @@ def printBoard():
 
 def isSafe(row,col):
     for i in range (N):
-        if board[row][i] == 'Q':
+        if board[row][i] == '[Q]':
             return False
     for j in range(N):
-        if board[j][col] == 'Q':
+        if board[j][col] == '[Q]':
             return False
 
     #Checks the NW Direction
     i = row-1
     j = col-1
     while(i>=0 and j>=0):
-        if board[i][j] == 'Q':
+        if board[i][j] == '[Q]':
             return False
         i = i-1
         j = j-1
@@ -37,7 +37,7 @@ def isSafe(row,col):
     i = row-1
     j = col+1
     while(i>=0 and j<N):
-        if board[i][j] == 'Q':
+        if board[i][j] == '[Q]':
             return False
         i = i-1
         j = j+1
@@ -46,7 +46,7 @@ def isSafe(row,col):
     i = row+1
     j = col-1
     while(i<N and j>=0):
-        if board[i][j] == 'Q':
+        if board[i][j] == '[Q]':
             return False
         i = i+1
         j = j-1
@@ -55,7 +55,7 @@ def isSafe(row,col):
     i = row+1
     j = col+1
     while(i<N and j<N):
-        if board[i][j] == 'Q':
+        if board[i][j] == '[Q]':
             return False
         i = i+1
         j = j+1
@@ -69,14 +69,19 @@ def Put(N, count):
     for i in range(N):
         for j in range(N):
             if isSafe(i, j):
-                board[i][j] = 'Q' # Placing the queen
+                board[i][j] = '[Q]' # Placing the queen
                 count = count+1
                 if Put(N, count) == True:
                     return True
-                board[i][j] = '-'
+                board[i][j] = '[-]'
                 count = count-1
     return False
+
+print('(-) represents the empty spot where the queen will be able to move and (Q) represents the queens on the board\n')
+print('This is the board for ' + str(N) + ' number of queens\n')
 
 getBoard()
 Put(N, 0)
 printBoard()
+
+print(' ')
