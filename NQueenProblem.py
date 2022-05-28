@@ -22,7 +22,7 @@ def isSafe(mat, r, c):
  
 def printSolution(mat):
     for r in mat:
-        print(str(r).replace(',', '').replace('\'', ''))
+        print(str(r).replace(',', '').replace("'", ''))
     print()
  
 def nQueen(mat, r):
