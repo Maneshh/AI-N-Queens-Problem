@@ -12,10 +12,12 @@ def printBoard(): # used to print the board to display the solution
         print("")
 
 
-def isSafe(row,col): # function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+def check(row,col): # function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+    
     for i in range (Q):
         if board[row][i] == '[Q]': # checks if there is a Queen in the corresponding row 
             return False
+
     for j in range(Q):
         if board[j][col] == '[Q]': # checks if there is Queen in the corresponding columns 
             return False # and it returns false if there is a queen
@@ -59,6 +61,8 @@ def isSafe(row,col): # function used to see if the queen is safe at a particular
 
     return True #if all the conditions are safe it returns true   
 
+
+
 # count - used to keep the count of number of queens in the board
 # check every cell is safe using the isSafe Function
 
@@ -68,12 +72,12 @@ def Insert(Q, count):
 
     for i in range(Q):
         for j in range(Q):
-            if isSafe(i, j): # going thru every cell in the board and checks if the cell is safe 
+            if check(i, j): # going thru every cell in the board and checks if the cell is safe 
                 board[i][j] = '[Q]' # Placing the queen if the cell is safe 
                 count = count + 1 # keeps track of number of queens in the board
                 if Insert(Q, count) == True: # calling the function recursively, now it takes in the new count 
                     return True
-                board[i][j] = '[-]' # if the position the queen is placed did not give the correct solution, set the cell back to its original form
+                board[i][j] = '[-]' # if the position the queen is placed did not give the correct solution, set the cell back to its original form (BackTracking)
                 count = count-1 # and reduce the count again 
     return False
 
