@@ -11,7 +11,6 @@ def printBoard(): # used to print the board to display the solution
             print(board[i][j], end = " ")
         print("")
 
-
 def check(row,col): # function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
     
     for i in range (Q):
@@ -61,10 +60,7 @@ def check(row,col): # function used to see if the queen is safe at a particular 
 
     return True #if all the conditions are safe it returns true   
 
-
-
 # count - used to keep the count of number of queens in the board
-# check every cell is safe using the isSafe Function
 
 def Insert(Q, count):
     if count == Q: # checks for example if a 5 x 5 board it has 5 queens it returns true 
@@ -81,10 +77,21 @@ def Insert(Q, count):
                 count = count-1 # and reduce the count again 
     return False
 
+def Userinput():
+    #Accepts the size of the chess board
+    while True:
+        try:
+            Q = int(input("Enter the number of Queens: "))
+            if Q <= 3:
+                print("Enter a value greater than or equal to 4, as there is no valid answer for Queens lesser than 4")
+                continue
+            return Q
+        except ValueError:
+            print("Invalid value entered. Enter an Integer")
 
 if __name__ == '__main__':
 
-    Q = int(input("Enter the number of Queens: ")) # Get the input for number of queens
+    Q =  Userinput()
     board = [] #Represents the Chess Board
 
     # Instructions to make the code clear 

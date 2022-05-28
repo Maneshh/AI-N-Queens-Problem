@@ -42,7 +42,7 @@ def nQueen(mat, r):
             nQueen(mat, r + 1)
             # backtrack and remove the queen from the current square
             mat[r][i] = '–'
- 
+
 if __name__ == '__main__':
     # N × N chessboard
     N = int(input("Enter the number of Queens: "))
