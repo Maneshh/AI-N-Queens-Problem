@@ -22,7 +22,7 @@ def get_board(n):
 
 def print_solution(solutions, n):
     #Prints one of the solutions randomly
-    x = random.randint(0,len(solutions)-1) #0 and len(solutions)-1 are inclusive
+    #x = random.randint(0,len(solutions)-1) #0 and len(solutions)-1 are inclusive
     for row in solutions:
         print(" ".join(row))
 

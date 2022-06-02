@@ -89,13 +89,6 @@ def Userinput():
         except ValueError:
             print("Invalid value entered. Enter an Integer")
 
-def printSolution(board):
-    for row in board:
-        print(str(row).replace(',', '').replace("'", ''))
-    print()
-
-        
-
 if __name__ == '__main__':
 
     Q =  Userinput()
