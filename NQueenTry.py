@@ -1,10 +1,3 @@
-def createBoard(): # used to define the board 
-    for i in range(Q): #loops the rows based on the users input
-        emptyLists = [] # creates empty slots for the board 
-        for j in range(Q):
-            emptyLists.append('[-]') # appends the [-] to the empty slot to define the board 
-        board.append(emptyLists) # Creates a Q x Q board 
-
 def printBoard(): # used to print the board to display the solution 
     for i in range(Q):
         for j in range(Q):
@@ -60,22 +53,16 @@ def check(row,col): # function used to see if the queen is safe at a particular 
 
     return True #if all the conditions are safe it returns true   
 
-# count - used to keep the count of number of queens in the board
+def Insert(board, row):
+    if row == len(board): # checks for example if a 5 x 5 board it has 5 queens it returns true 
+        printSolution(board)
+        return
 
-def Insert(Q, count):
-    if count == Q: # checks for example if a 5 x 5 board it has 5 queens it returns true 
-        return True
-
-    for i in range(Q):
-        for j in range(Q):
-            if check(i, j): # going thru every cell in the board and checks if the cell is safe 
-                board[i][j] = '[Q]' # Placing the queen if the cell is safe 
-                count = count + 1 # keeps track of number of queens in the board
-                if Insert(Q, count) == True: # calling the function recursively, now it takes in the new count 
-                    return True
-                board[i][j] = '[-]' # if the position the queen is placed did not give the correct solution, set the cell back to its original form (BackTracking)
-                count = count-1 # and reduce the count again 
-    return False
+    for col in range(len(board)):
+        if check (row, col):
+            board[row][col] = '[Q]' # Placing the queen if the cell is safe 
+            Insert(board, row + 1)
+            board[row][col] = '[-]'
 
 def Userinput():
     #Accepts the size of the chess board
@@ -91,23 +78,19 @@ def Userinput():
 
 def printSolution(board):
     for row in board:
-        print(str(row).replace(',', '').replace("'", ''))
+        print(row)
     print()
 
-        
 
+def get_board(Q):
+    board = ['[-]']*Q
+    for i in range(Q):
+        board[i] = ['[-]']*Q
+    return board
+
+        
 if __name__ == '__main__':
 
     Q =  Userinput()
-    board = [] #Represents the Chess Board
-
-    # Instructions to make the code clear 
-    print('(-) represents the empty spot where the queen will be able to move and (Q) represents the queens on the board\n')
-    print('This is the board for ' + str(Q) + ' number of queens\n')
-    #Functions called to get the board
-    createBoard()
-    #Function to 
-    Insert(Q, 0) # count of queens is 0 at the start 
-    #Function to print the board 
-    printBoard()
-    print(' ')
+    board = get_board(Q)
+    Insert(board, 0)
