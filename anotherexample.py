@@ -1,5 +1,3 @@
-import copy
-
 def Userinput():
     #Accepts the size of the chess board
     while True:
@@ -19,13 +17,13 @@ def get_board(Q):
         board[i] = ['[-]']*Q
     return board
 
-def check(board, row, col, Q): # function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+def check(board, row, col): # function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
     
-    for i in range (Q):
+    for i in range (row):
         if board[row][i] == '[Q]': # checks if there is a Queen in the corresponding row 
             return False
 
-    for j in range(Q):
+    for j in range(row):
         if board[j][col] == '[Q]': # checks if there is Queen in the corresponding columns 
             return False # and it returns false if there is a queen
 
@@ -68,40 +66,27 @@ def check(board, row, col, Q): # function used to see if the queen is safe at a 
 
     return True #if all the conditions are safe it returns true   
 
-def insert(board, row, Q):
+def insert(board, row):
 
-    if row == Q:
+    if row == len(board):
+        print_solution(board)
         return True
+    
 
-    for i in range(Q):
-        if check(board, i, row, Q):
-            board[i][row] = '[Q]'
-            if row == Q-1:
-                add_solution(board)
-                board[i][row] = '[-]'
-                return True
-            insert(board, row+1, Q)
-            board[i][row] = '[-]'
+    for col in range(len(board)):
+        if check(board, row, col):
+            board[row][col] = '[Q]'
+            insert(board, row+1)
+            board[row][col] = '[-]'
+    return False
 
 
-def add_solution(board):
-    global solutions
-    saved_board = copy.deepcopy(board)
-    solutions.append(saved_board)
-
-
-def print_solution(solutions, Q):
-    for row in solutions:
-        print((row))
+def print_solution(board):
+    for row in board:
+        print(str(row).replace(',', '').replace("'", ''))
     print()
-
 
 if __name__ == '__main__':
     Q =  Userinput()
     board = get_board(Q)
-    solutions = []
-    insert(board, 0, Q)
-    print_solution(solutions, Q)
-
-    print()
-    print("Total number of solutions=", len(solutions))
+    insert(board, 0)
