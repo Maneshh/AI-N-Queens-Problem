@@ -1,3 +1,5 @@
+import copy
+
 def Userinput():
     #Accepts the size of the chess board
     while True:
@@ -82,16 +84,14 @@ def insert(board, row):
             board[row][col] = '[-]'
     return False
 
-    
-
-
 
 def print_solution(board):
     for row in board:
-        print(str(row).replace(',', '').replace("'", ''))
+        print(str(row).replace(',', '').replace("'", ''))  
     print()
 
 if __name__ == '__main__':
     Q =  Userinput()
     board = get_board(Q)
+    solutions = []
     insert(board, 0)
