@@ -66,6 +66,8 @@ def check(board, row, col): # function used to see if the queen is safe at a par
 
     return True #if all the conditions are safe it returns true   
 
+
+
 def insert(board, row):
 
     if row == len(board):
@@ -79,6 +81,9 @@ def insert(board, row):
             insert(board, row+1)
             board[row][col] = '[-]'
     return False
+
+    
+
 
 
 def print_solution(board):
