@@ -1,5 +1,5 @@
 #Function to check users input to make sure it is valid
-def userInput():
+def user_input():
     while True:
         try:
             Q = int(input("Enter the number of Queens: "))
@@ -11,7 +11,7 @@ def userInput():
             print("Invalid value entered. Enter an Integer")
 
 #Function to get a Q x Q board
-def getBoard(Q):
+def get_board(Q):
     board = ['[-]']*Q
     for i in range(Q):
         board[i] = ['[-]']*Q
@@ -90,8 +90,8 @@ def print_solution(board):
     print()
 
 if __name__ == '__main__':
-    Q =  userInput()
-    board = getBoard(Q)
+    Q =  user_input()
+    board = get_board(Q)
     results = []
     insert(board, 0, Q)
     print()
