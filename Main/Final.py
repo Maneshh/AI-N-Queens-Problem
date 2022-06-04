@@ -11,7 +11,7 @@ def userInput():
             print("Invalid value entered. Enter an Integer")
 
 #Function to get a Q x Q board
-def get_board(Q):
+def getBoard(Q):
     board = ['[-]']*Q
     for i in range(Q):
         board[i] = ['[-]']*Q
@@ -91,7 +91,7 @@ def print_solution(board):
 
 if __name__ == '__main__':
     Q =  userInput()
-    board = get_board(Q)
+    board = getBoard(Q)
     results = []
     insert(board, 0, Q)
     print()
