@@ -1,10 +1,10 @@
 #Function to check users input to make sure it is valid
-def Userinput():
+def userInput():
     while True:
         try:
             Q = int(input("Enter the number of Queens: "))
             if Q <= 3:
-                print("Enter a value greater than or equal to 4, as there is no valid answer for Queens lesser than 4")
+                print("Enter a value greater than or equal to 4")
                 continue
             return Q
         except ValueError:
@@ -90,7 +90,7 @@ def print_solution(board):
     print()
 
 if __name__ == '__main__':
-    Q =  Userinput()
+    Q =  userInput()
     board = get_board(Q)
     results = []
     insert(board, 0, Q)
