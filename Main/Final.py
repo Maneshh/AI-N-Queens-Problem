@@ -1,7 +1,5 @@
-import copy
-
+#Function to check users input to make sure it is valid
 def Userinput():
-    #Accepts the size of the chess board
     while True:
         try:
             Q = int(input("Enter the number of Queens: "))
@@ -12,14 +10,15 @@ def Userinput():
         except ValueError:
             print("Invalid value entered. Enter an Integer")
 
+#Function to get a Q x Q board
 def get_board(Q):
-    #Returns an n by n board
     board = ['[-]']*Q
     for i in range(Q):
         board[i] = ['[-]']*Q
     return board
 
-def check(board, row, col): # function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+# function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+def check(board, row, col): 
     
     for i in range (row):
         if board[row][i] == '[Q]': # checks if there is a Queen in the corresponding row 
@@ -68,30 +67,32 @@ def check(board, row, col): # function used to see if the queen is safe at a par
 
     return True #if all the conditions are safe it returns true   
 
+# The backtracing function where it checks when to place the queen
+def insert(board, row, Q):
 
-
-def insert(board, row):
-
-    if row == len(board):
-        print_solution(board)
+    if row == Q: # Out of bounds, you have iterated through every row
+        print_solution(board) # prints out the solution everytime a full board is reached
+        copy = [row] # Array to keep track of all the solutions
+        results.append(copy) # Appends to results to print out for the users
         return True
-    
 
-    for col in range(len(board)):
-        if check(board, row, col):
-            board[row][col] = '[Q]'
-            insert(board, row+1)
-            board[row][col] = '[-]'
+    for col in range(Q): # checks every column in the row
+        if check(board, row, col): # checks if the cell has been used and is safe to place the queen
+            board[row][col] = '[Q]' # if it hasnt been used, place the queen
+            insert(board, row+1, Q) # backtracking for the next row
+            board[row][col] = '[-]' # if the solution is not reached replace the Q with - 
     return False
 
-
+#prints out solution for the problem
 def print_solution(board):
     for row in board:
-        print(str(row).replace(',', '').replace("'", ''))  
+        print(str(row).replace(',', '').replace("'", '')) #makes the row looks cleaner 
     print()
 
 if __name__ == '__main__':
     Q =  Userinput()
     board = get_board(Q)
-    solutions = []
-    insert(board, 0)
+    results = []
+    insert(board, 0, Q)
+    print()
+    print("For {0} Number of Queens there are a total of {1} Solutions".format(Q,len(results)) + "\n")
