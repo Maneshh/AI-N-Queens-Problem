@@ -1,16 +1,18 @@
+#Function to define the board
 def get_board(Q):
     board = ['[-]']*Q
     for i in range(Q):
         board[i] = ['[-]']*Q
     return board
 
-def print_board(): # used to print the board to display the solution 
+#Function to print out the board
+def print_board():
     for i in range(Q):
         for j in range(Q):
             print(board[i][j], end = " ")
         print("")
 
-# function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+#Function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
 def check(board,row,col): 
     
     for i in range (Q):
@@ -60,23 +62,24 @@ def check(board,row,col):
 
     return True #if all the conditions are safe it returns true   
 
-
-def insert(Q, count):
+#Recursive Backtracking function to place the queens on the board
+def insert(board, Q, count):
     if count == Q: # checks for example if a 5 x 5 board it has 5 queens it returns true 
         return True
 
     for row in range(Q):
         for col in range(Q):
             if check(board, row, col): # going thru every cell in the board and checks if the cell is safe 
-                board[row][col] = '[Q]' # Placing the queen if the cell is safe 
-                if insert(Q, count+1) == True: # calling the function recursively, now it takes in the new count 
+                board[row][col] = '[Q]' # Placing the queen if the cell is safe
+                count = count + 1 
+                if insert(board, Q, count) == True: # calling the function recursively, now it takes in the new count 
                     return True
                 board[row][col] = '[-]' # replace the Q with [-] and go back to check
                 count = count-1 # and reduce the count again 
     return False
 
+#Function to check users Input to match the conditions
 def user_input():
-    #Accepts the size of the chess board
     while True:
         try:
             Q = int(input("Enter the number of Queens: "))
@@ -90,14 +93,18 @@ def user_input():
 if __name__ == '__main__':
 
     Q =  user_input()
+
     # Instructions to make the code clear 
     print()
     print('(-) represents the empty spot where the queen will be able to move and (Q) represents the queens on the board\n')
     print('This is the board for ' + str(Q) + ' number of queens\n')
+
     #Functions called to get the board
     board = get_board(Q)
-    #Function to 
-    insert(Q, 0) # count of queens is 0 at the start 
-    #Function to print the board 
+
+    #Function to place all the queens on the baord
+    insert(board, Q, 0) # count of queens is 0 at the start 
+
+    #Function to print the board and its final solution
     print_board()
     print(' ')
