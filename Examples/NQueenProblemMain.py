@@ -1,9 +1,8 @@
-def createBoard(): # used to define the board 
-    for i in range(Q): #loops the rows based on the users input
-        emptyLists = [] # creates empty slots for the board 
-        for j in range(Q):
-            emptyLists.append('[-]') # appends the [-] to the empty slot to define the board 
-        board.append(emptyLists) # Creates a Q x Q board 
+def get_board(Q):
+    board = ['[-]']*Q
+    for i in range(Q):
+        board[i] = ['[-]']*Q
+    return board
 
 def printBoard(): # used to print the board to display the solution 
     for i in range(Q):
@@ -92,13 +91,11 @@ def user_input():
 if __name__ == '__main__':
 
     Q =  user_input()
-    board = [] #Represents the Chess Board
-
     # Instructions to make the code clear 
     print('(-) represents the empty spot where the queen will be able to move and (Q) represents the queens on the board\n')
     print('This is the board for ' + str(Q) + ' number of queens\n')
     #Functions called to get the board
-    createBoard()
+    board = get_board(Q)
     #Function to 
     Insert(Q, 0) # count of queens is 0 at the start 
     #Function to print the board 
