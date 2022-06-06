@@ -77,13 +77,13 @@ def Insert(Q, count):
                 count = count-1 # and reduce the count again 
     return False
 
-def Userinput():
+def user_input():
     #Accepts the size of the chess board
     while True:
         try:
             Q = int(input("Enter the number of Queens: "))
             if Q <= 3:
-                print("Enter a value greater than or equal to 4, as there is no valid answer for Queens lesser than 4")
+                print("Enter a value greater than or equal to 4")
                 continue
             return Q
         except ValueError:
@@ -91,7 +91,7 @@ def Userinput():
 
 if __name__ == '__main__':
 
-    Q =  Userinput()
+    Q =  user_input()
     board = [] #Represents the Chess Board
 
     # Instructions to make the code clear 
