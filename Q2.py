@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author: manesh
+"""
+
 # Creates board of size Q x Q
 def get_board(Q):
     board = ['[-]']*Q
@@ -92,7 +97,8 @@ def user_input():
 if __name__ == '__main__':
     Q =  user_input()
 
-    print('\n(-) represents the empty cells on the board and (Q) represents the Queens\n')
+    print('\n(-) represents the empty cells on the board')
+    print('(Q) represents the Queens\n')
     print('Solution for ' + str(Q) + ' Queens on a ' + str(Q) + 'x' + str(Q) + ' board:\n')
 
 
