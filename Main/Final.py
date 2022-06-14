@@ -8,7 +8,7 @@ def user_input():
                 continue
             return Q
         except ValueError:
-            print("Invalid value entered. Enter an Integer")
+            print("Invalid value. Please enter an Integer.")
 
 #Function to get a Q x Q board
 def get_board(Q):
@@ -69,7 +69,6 @@ def check(board, row, col):
 
 # The backtracing function where it checks when to place the queen
 def insert(board, row, Q):
-
     if row == Q: # Out of bounds, you have iterated through every row
         print_solution(board) # prints out the solution everytime a full board is reached
         copy = [row] # Array to keep track of all the solutions
