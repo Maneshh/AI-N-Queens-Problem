@@ -1,30 +1,25 @@
-#Function to check users input to make sure it is valid
-def user_input():
-    while True:
-        try:
-            Q = int(input("Enter the number of Queens: "))
-            if Q <= 3:
-                print("Enter a value greater than or equal to 4")
-                continue
-            return Q
-        except ValueError:
-            print("Invalid value entered. Enter an Integer")
-
-#Function to get a Q x Q board
+#Function to define the board
 def get_board(Q):
     board = ['[-]']*Q
     for i in range(Q):
         board[i] = ['[-]']*Q
     return board
 
-# function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
-def check(board, row, col): 
+#Function to print out the board
+def print_board():
+    for i in range(Q):
+        for j in range(Q):
+            print(board[i][j], end = " ")
+        print("")
+
+#Function used to see if the queen is safe at a particular location in the board ( refering to row and columns )
+def check(board,row,col): 
     
-    for i in range (row):
+    for i in range (Q):
         if board[row][i] == '[Q]': # checks if there is a Queen in the corresponding row 
             return False
 
-    for j in range(row):
+    for j in range(Q):
         if board[j][col] == '[Q]': # checks if there is Queen in the corresponding columns 
             return False # and it returns false if there is a queen
 
@@ -67,32 +62,49 @@ def check(board, row, col):
 
     return True #if all the conditions are safe it returns true   
 
-# The backtracing function where it checks when to place the queen
-def insert(board, row, Q):
-
-    if row == Q: # Out of bounds, you have iterated through every row
-        print_solution(board) # prints out the solution everytime a full board is reached
-        copy = [row] # Array to keep track of all the solutions
-        results.append(copy) # Appends to results to print out for the users
+#Recursive Backtracking function to place the queens on the board
+def insert(board, Q, count):
+    if count == Q: # checks for example if a 5 x 5 board it has 5 queens it returns true 
         return True
 
-    for col in range(Q): # checks every column in the row
-        if check(board, row, col): # checks if the cell has been used and is safe to place the queen
-            board[row][col] = '[Q]' # if it hasnt been used, place the queen
-            insert(board, row+1, Q) # backtracking for the next row
-            board[row][col] = '[-]' # if the solution is not reached replace the Q with - 
+    for row in range(Q):
+        for col in range(Q):
+            if check(board, row, col): # going thru every cell in the board and checks if the cell is safe 
+                board[row][col] = '[Q]' # Placing the queen if the cell is safe
+                count = count + 1 
+                if insert(board, Q, count) == True: # calling the function recursively, now it takes in the new count 
+                    return True
+                board[row][col] = '[-]' # replace the Q with [-] and go back to check
+                count = count-1 # and reduce the count again 
     return False
 
-#prints out solution for the problem
-def print_solution(board):
-    for row in board:
-        print(str(row).replace(',', '').replace("'", '')) #makes the row looks cleaner 
-    print()
+#Function to check users Input to match the conditions
+def user_input():
+    while True:
+        try:
+            Q = int(input("Enter the number of Queens: "))
+            if Q <= 3:
+                print("Enter a value greater than or equal to 4")
+                continue
+            return Q
+        except ValueError:
+            print("Invalid value entered. Enter an Integer")
 
 if __name__ == '__main__':
+
     Q =  user_input()
-    board = get_board(Q)
-    results = []
-    insert(board, 0, Q)
+
+    # Instructions to make the code clear 
     print()
-    print("For {0} Number of Queens there are a total of {1} Solutions".format(Q,len(results)) + "\n")
+    print('(-) represents the empty spot where the queen will be able to move and (Q) represents the queens on the board\n')
+    print('This is the board for ' + str(Q) + ' number of queens\n')
+
+    #Functions called to get the board
+    board = get_board(Q)
+
+    #Function to place all the queens on the baord
+    insert(board, Q, 0) # count of queens is 0 at the start 
+
+    #Function to print the board and its final solution
+    print_board()
+    print(' ')
