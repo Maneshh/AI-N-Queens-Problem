@@ -86,7 +86,7 @@ def insert(board, Q, count):
 def user_input():
     while True:
         try:
-            Q = int(input("Enter the number of Queens: "))
+            Q = int(input("Enter the number of Queens (minimum 4): "))
             if Q <= 3:
                 print("Enter a value greater than or equal to 4")
                 continue
